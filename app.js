@@ -1,6 +1,7 @@
-if(process.env.NODE_ENV!=='production'){
-    require('dotenv').config();
-}
+// if(process.env.NODE_ENV!=='production'){
+//     require('dotenv').config();
+// }
+require('dotenv').config();
 const express=require('express');
 const mongoose=require('mongoose');
 const path=require('path');
@@ -22,8 +23,8 @@ const reviewRoutes=require('./routes/reviews');
 
 const MongoStore=require('connect-mongo')(session);
 
-const dbUrl='mongodb://localhost:27017/my-camp'
-//const dbUrl = process.env.DB_URL;
+//const dbUrl='mongodb://localhost:27017/my-camp'
+const dbUrl = process.env.DB_URL;
 mongoose.connect(dbUrl,{
     useNewUrlParser:true,
     useUnifiedTopology:true,
@@ -157,8 +158,9 @@ app.use((err,req,res,next)=>{
     res.status(statusCode).render('error',{err})
 })
 //order of routes matter
-app.listen(3000,()=>{
-    console.log('serving on port 3000');
+const port = process.env.PORT || 3000;
+app.listen(port,()=>{
+    console.log(`serve at http://localhost:${port}`);
 })
 
 
