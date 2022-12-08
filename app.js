@@ -22,7 +22,7 @@ const campgroundRoutes=require('./routes/campgrounds');
 const reviewRoutes=require('./routes/reviews');
 
 const MongoStore=require('connect-mongo')(session);
-
+mongoose.set('strictQuery', true);
 //const dbUrl='mongodb://localhost:27017/my-camp'
 const dbUrl = process.env.DB_URL;
 mongoose.connect(dbUrl,{
