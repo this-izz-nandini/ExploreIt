@@ -25,6 +25,7 @@ const MongoStore=require('connect-mongo')(session);
 mongoose.set('strictQuery', true);
 //const dbUrl='mongodb://localhost:27017/my-camp'
 const dbUrl = process.env.DB_URL;
+const mysecret = process.env.SECRET;
 mongoose.connect(dbUrl,{
     useNewUrlParser:true,
     useUnifiedTopology:true,
@@ -50,7 +51,7 @@ app.use(mongoSanitize(
 ));
 const store=new MongoStore({
     url:dbUrl,
-    secret:'thisshouldbeabettersecret',
+    secret:mysecret,
     touchAfter: 24*60*60,
 })
 store.on('error',function(e){
@@ -59,7 +60,7 @@ store.on('error',function(e){
 const sessionConfig={
     store,
     name:'session',
-    secret:'thisshouldbeabettersecret',
+    secret:mysecret,
     resave:false,
     saveUninitialized:true,
     cookie:{
