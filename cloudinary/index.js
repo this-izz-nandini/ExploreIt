@@ -9,7 +9,7 @@ const storage=new CloudinaryStorage({
     cloudinary,
     params:{
         folder:'ExploreIt',
-    allowedFormays:['jpeg','png','jpg']
+    allowedFormats:['jpeg','png','jpg']
     }
     
 });
